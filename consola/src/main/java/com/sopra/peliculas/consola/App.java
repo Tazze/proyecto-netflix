@@ -1,14 +1,13 @@
 package com.sopra.peliculas.consola;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Iterator;
 
-import com.sopra.peliculas.dao.PeliculaMapDAO;
-import com.sopra.peliculas.modelo.entities.Categoria;
 import com.sopra.peliculas.modelo.entities.Pelicula;
 import com.sopra.peliculas.negocio.GestorPeliculas;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Hello world!
@@ -16,34 +15,30 @@ import com.sopra.peliculas.negocio.GestorPeliculas;
  */
 public class App 
 {
+
     public static void main( String[] args )
-    {
-    	GestorPeliculas gestor = new GestorPeliculas(new PeliculaMapDAO(new HashMap<Integer, Pelicula>()));
-    	
-    	
-    	System.out.println("-----------------------------");
-    	System.out.println("Dando de alta peliculas...");
-    	System.out.println("-----------------------------\n");
-    	ArrayList<Pelicula> peliculas = new ArrayList<>();
+    {	
+        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        GestorPeliculas gestor = context.getBean("gestorPeliculas", GestorPeliculas.class);
+        
+        //ALTA
+
+        printMessage("Dando de alta peliculas...");
+
+        List<Pelicula> peliculas = context.getBean("lista", List.class);  
+
         for(int i = 0; i<10; i++) {
-        	Pelicula peli = new Pelicula();
-        	peli.setTitulo("Pelicula "+i);
-        	peli.setDirector("Director de la pelicula "+i);
-        	peli.setSinopsis("Sinopsis de la pelicula "+i);
-        	peli.setCategorias(Arrays.asList(Categoria.ACCION));
+        	Pelicula peli = context.getBean("pelicula", Pelicula.class);
         	peliculas.add(peli);
         }
         gestor.altaPelicula(peliculas);
         
-        for(Pelicula p : gestor.listaPelicula()) {
-        	System.out.println(p.toString()+"\n");
-        }
+        listarPeliculas(gestor);
         
-        
-        System.out.println("-----------------------------");
-    	System.out.println("Modificando peliculas...");
-    	System.out.println("-----------------------------\n");
-    	peliculas = new ArrayList<>();
+        //MODIFICACION
+
+        printMessage("Modificando peliculas...");
+        peliculas = context.getBean("lista", List.class);  
         Iterator<Pelicula> iter = gestor.listaPelicula().iterator();
         for(int i = 0; i<2; i++) {
         	Pelicula p = iter.next();
@@ -52,24 +47,36 @@ public class App
         }
         gestor.updatePelicula(peliculas);
         
-        for(Pelicula p : gestor.listaPelicula()) {
-        	System.out.println(p.toString()+"\n");
-        }
+        listarPeliculas(gestor);
         
         
-        System.out.println("-----------------------------");
-    	System.out.println("Borrando peliculas...");
-    	System.out.println("-----------------------------\n");
+        //BORRADO
+
+        printMessage("Borrando peliculas...");
+
         iter = gestor.listaPelicula().iterator();
-        ArrayList<Integer> peliculasABorrar = new ArrayList<>();
+        List<Integer> peliculasABorrar = context.getBean("lista", List.class); 
         for(int i = 0; i<2; i++) {
         	peliculasABorrar.add(iter.next().getIdentificador());
         }
         gestor.deletePelicula(peliculasABorrar);
         
+        listarPeliculas(gestor);
+
+        ((ClassPathXmlApplicationContext)context).close();
+        
+    }
+
+    private static void printMessage(String str){
+        System.out.println("-----------------------------");
+    	System.out.println(str);
+        System.out.println("-----------------------------\n");
+    }
+
+    private static void listarPeliculas(GestorPeliculas gestor){
+        System.out.println("numero de peliculas:" + gestor.listaPelicula().size() + "\n");
         for(Pelicula p : gestor.listaPelicula()) {
         	System.out.println(p.toString()+"\n");
         }
-        
     }
 }

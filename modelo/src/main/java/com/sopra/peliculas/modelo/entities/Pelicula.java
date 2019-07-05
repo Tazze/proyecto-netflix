@@ -74,9 +74,10 @@ public class Pelicula {
 
 	@Override
 	public String toString() {
-		return "Pelicula [titulo=" + titulo +  ", \ndirector=" + director + ", \nsinopsis=" + sinopsis + ", \ncategorias="
-				+ categorias + "]";
+		return "Pelicula [categorias=" + categorias + ", director=" + director + ", identificador=" + identificador
+				+ ", sinopsis=" + sinopsis + ", titulo=" + titulo + "]";
 	}
+
 	
 	
 	

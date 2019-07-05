@@ -9,7 +9,7 @@ import com.sopra.peliculas.modelo.entities.Pelicula;
 public class GestorPeliculas {
 	
 	private IPeliculaDAO DAOPeliculas;
-	
+
 	public GestorPeliculas(IPeliculaDAO DAOPeliculas) {
 		this.DAOPeliculas = DAOPeliculas;
 	}

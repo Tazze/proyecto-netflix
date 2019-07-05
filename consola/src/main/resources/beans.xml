@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:lang="http://www.springframework.org/schema/lang" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd">
+    <!--  bean definitions here  -->
+
+    <bean id="lista" class="java.util.ArrayList" scope="prototype">
+    </bean>
+
+    <bean id="pelicula" class="com.sopra.peliculas.modelo.entities.Pelicula" scope="prototype">
+        <property name="titulo" value="titulo de la pelicula"/>
+        <property name="director" value="director de la pelicula"/>
+        <property name="sinopsis" value="sinopsis de la pelicula"/>
+        <property name="categorias" ref="lista"/>
+    </bean>
+
+    <bean id="mapa" class="java.util.HashMap" scope="prototype">
+    </bean>
+
+    <bean id="gestorPeliculas" class="com.sopra.peliculas.negocio.GestorPeliculas">
+        <constructor-arg index="0" ref="daoPeliculas"/>
+    </bean>
+
+    <bean id="daoPeliculas" class="com.sopra.peliculas.dao.PeliculaMapDAO" scope="singleton">
+        <constructor-arg index="0" ref="mapa"/>
+    </bean>
+
+</beans>
