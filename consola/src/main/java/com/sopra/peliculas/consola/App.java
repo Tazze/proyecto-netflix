@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 
 import com.sopra.peliculas.dao.PeliculaMapDAO;
 import com.sopra.peliculas.modelo.entities.Categoria;
