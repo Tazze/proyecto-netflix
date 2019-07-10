@@ -3,6 +3,11 @@ package com.sopra.peliculas.modelo.entities;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+@Scope("prototype")
 public class Pelicula {
 	private static AtomicInteger secuencia;
 	private Integer identificador;

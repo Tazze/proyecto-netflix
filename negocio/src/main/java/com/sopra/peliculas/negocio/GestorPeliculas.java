@@ -6,8 +6,15 @@ import java.util.List;
 import com.sopra.peliculas.dao.IPeliculaDAO;
 import com.sopra.peliculas.modelo.entities.Pelicula;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+@Scope("session")
 public class GestorPeliculas {
 	
+	@Autowired
 	private IPeliculaDAO DAOPeliculas;
 
 	public GestorPeliculas(IPeliculaDAO DAOPeliculas) {

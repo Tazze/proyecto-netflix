@@ -5,8 +5,17 @@ import java.util.Map;
 
 import com.sopra.peliculas.modelo.entities.Pelicula;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+@Scope("singleton")
 public class PeliculaMapDAO implements IPeliculaDAO {
 
+	@Autowired
+	@Qualifier("mapaPeliculas")
 	private Map<Integer, Pelicula> catalogo;
 	
 	public PeliculaMapDAO(Map<Integer, Pelicula> catalogo) {
