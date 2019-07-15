@@ -1,27 +1,42 @@
 package com.sopra.peliculas.modelo.entities;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Component
-@Scope("prototype")
+@Entity
 public class Pelicula {
-	private static AtomicInteger secuencia;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer identificador;
 	private String titulo;
 	private String director;
 	private String sinopsis;
-	List<Categoria> categorias;
-	
-	static {
-		secuencia = new AtomicInteger();
+
+	@ElementCollection(targetClass = Categoria.class)
+	@Enumerated(EnumType.STRING)
+	private List<Categoria> categorias;
+
+	public Pelicula(){
+		super();
 	}
-	
-	public Pelicula() {
-		identificador = secuencia.getAndIncrement();
+
+	public Pelicula(String titulo, String director){
+		this.titulo = titulo;
+		this.director = director;
+	}
+
+	public Pelicula(String titulo, String director, String sinopsis, List<Categoria> categorias){
+		this.titulo = titulo;
+		this.director = director;
+		this.sinopsis = sinopsis;
+		this.categorias = categorias;
 	}
 	
 	public Integer getIdentificador() {

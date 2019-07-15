@@ -1,0 +1,10 @@
+server:
+  port: 8621
+spring:
+  application:
+    name: proyecto-netflix-restjpa
+  cloud:
+    config:
+      enabled: true
+      uri:
+      - http://localhost:8888
