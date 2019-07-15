@@ -2,7 +2,7 @@ spring:
   application:
     name: proyecto-netflix-mvc
 server:
-  port: 8622
+  port: 8988
 eureka:
   client:
     service-url:

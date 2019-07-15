@@ -1,4 +1,4 @@
-package com.sopra.peliculas.mvc;
+package com.sopra.peliculas.mvc.controller;
 
 import java.util.ArrayList;
 import java.util.List;
