@@ -1,9 +1,0 @@
-spring:
-  application:
-    name: proyecto-netflix-mvc
-server:
-  port: 8988
-eureka:
-  client:
-    service-url:
-       defaultZone: http://localhost:8887/eureka/

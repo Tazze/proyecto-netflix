@@ -1,12 +1,28 @@
-package com.sopra.peliculas.modelo.entities;
+package com.sopra.peliculas.restjpa.model.entities;
 
 import java.util.List;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.sopra.peliculas.modelo.entities.Categoria;
+
+@Entity
 public class Pelicula {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer identificador;
 	private String titulo;
 	private String director;
 	private String sinopsis;
+
+	@ElementCollection(targetClass = Categoria.class)
+	@Enumerated(EnumType.STRING)
 	private List<Categoria> categorias;
 
 	public Pelicula(){

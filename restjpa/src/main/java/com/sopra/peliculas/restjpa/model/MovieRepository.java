@@ -1,6 +1,6 @@
 package com.sopra.peliculas.restjpa.model;
 
-import com.sopra.peliculas.modelo.entities.Pelicula;
+import com.sopra.peliculas.restjpa.model.entities.Pelicula;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

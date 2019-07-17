@@ -24,6 +24,8 @@ public class MovieControllerMVC{
     @Autowired
     private RestTemplate restTemplate;
 
+    private String jpaServerBaseUrl = "http://proyecto-netflix-restjpa";
+
     @RequestMapping("/")
     public String home(Model model){
         model.addAttribute("movie", new Pelicula());
@@ -33,7 +35,7 @@ public class MovieControllerMVC{
 
     @RequestMapping("/list")
     public String movieList(Model model){
-        String dataURL = "http://proyecto-netflix-restjpa/repositorio";
+        String dataURL = jpaServerBaseUrl + "/repositorio";
         ResponseEntity<List> response = restTemplate.exchange(dataURL, HttpMethod.GET, null, List.class);
         List movies = response.getBody();
         model.addAttribute("movies", movies);
@@ -42,7 +44,7 @@ public class MovieControllerMVC{
 
     @RequestMapping("/new")
     public String newMovie(@RequestParam("titulo") String titulo, @RequestParam("director") String director, @RequestParam("sinopsis") String sinopsis,  Model model){
-        String dataURL = "http://proyecto-netflix-restjpa/repositorio";
+        String dataURL = jpaServerBaseUrl + "/repositorio";
         Pelicula movie = new Pelicula(titulo, director, sinopsis, new ArrayList<Categoria>());
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

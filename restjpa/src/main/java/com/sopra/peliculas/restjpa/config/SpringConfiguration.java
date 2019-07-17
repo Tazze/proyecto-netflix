@@ -3,8 +3,8 @@ package com.sopra.peliculas.restjpa.config;
 import java.util.Arrays;
 
 import com.sopra.peliculas.restjpa.model.MovieRepository;
+import com.sopra.peliculas.restjpa.model.entities.Pelicula;
 import com.sopra.peliculas.modelo.entities.Categoria;
-import com.sopra.peliculas.modelo.entities.Pelicula;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

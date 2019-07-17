@@ -1,0 +1,37 @@
+version: '3.3'
+services:
+  config-server:
+    build: ./config
+  front-server:
+    build: ./mvc
+    ports:
+      - 8080:8080
+    depends_on:
+      - eureka-server
+      - back-server
+  eureka-server:
+    build: ./eureka
+    ports:
+      - 8761:8761 
+  back-server:
+    build: ./restjpa
+    depends_on:
+      - mysql-server
+      - eureka-server
+      - config-server
+  back-server-2:
+    build: ./restjpa
+    depends_on:
+      - mysql-server
+      - eureka-server
+      - config-server
+  back-server-3:
+    build: ./restjpa
+    depends_on:
+      - mysql-server
+      - eureka-server
+      - config-server
+  mysql-server:
+    image: mysql:8.0.16
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"

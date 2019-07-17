@@ -3,7 +3,7 @@ package com.sopra.peliculas.restjpa.controllers;
 import java.util.List;
 
 import com.sopra.peliculas.restjpa.model.MovieRepository;
-import com.sopra.peliculas.modelo.entities.Pelicula;
+import com.sopra.peliculas.restjpa.model.entities.Pelicula;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
